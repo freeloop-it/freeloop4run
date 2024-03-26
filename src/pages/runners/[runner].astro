@@ -1,0 +1,18 @@
+---
+export async function getStaticPaths() {
+  const runners = await Astro.glob('./runners/*.md')
+
+  return runners.map(runner => ({
+    params: {
+      slug: runner.frontmatter.slug
+    },
+    props: {
+        runner
+    },
+  }))
+
+
+const { Content } = Astro.props.runner
+---
+
+<div><Content /></div>
